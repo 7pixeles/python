@@ -35,10 +35,10 @@ class SecurePlant:
             height (int | float): Initial height in centimeters.
             age (int): Initial age in days.
         """
-        self._name = name
-        self._height = height
-        self._age = age
-        print(f"Plant created: {self._name}")
+        self.__name = name
+        self.__height = height
+        self.__age = age
+        print(f"Plant created: {self.__name}")
         SecurePlant.total_plants += 1
 
     @property
@@ -50,7 +50,7 @@ class SecurePlant:
             int | float: Height in centimeters.
         """
         print()
-        return self._height
+        return self.__height
 
     @height.setter
     def height(self, value):
@@ -63,7 +63,7 @@ class SecurePlant:
             value (int | float): New height in centimeters.
         """
         if value > 0:
-            self._height = value
+            self.__height = value
             print(f"Height updated: {value}cm [OK]")
         else:
             print(f"Invalid operation attempted: height {value}cm [REJECTED]")
@@ -77,7 +77,7 @@ class SecurePlant:
         Returns:
             int: Age in days.
         """
-        return self._age
+        return self.__age
 
     @age.setter
     def age(self, value):
@@ -90,7 +90,7 @@ class SecurePlant:
             value (int): New age in days.
         """
         if value > 0:
-            self._age = value
+            self.__age = value
             print(f"Age updated: {value} days [OK]")
         else:
             print(f"Invalid operation attempted: age {value}cm [REJECTED]")
@@ -100,8 +100,8 @@ class SecurePlant:
         """
         Prints the current information of the plant.
         """
-        print(f"\nCurrent Plant: {self._name} ", end='')
-        print(f"({self._height}cm, {self._age} days)")
+        print(f"\nCurrent Plant: {self.__name} ", end='')
+        print(f"({self.__height}cm, {self.__age} days)")
 
 
 if __name__ == "__main__":
