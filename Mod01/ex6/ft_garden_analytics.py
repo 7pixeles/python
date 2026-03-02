@@ -3,7 +3,6 @@
 class Plant:
     """
     Represents a basic plant with a name and height.
-
     A Plant can grow over time and provides a score value
     based on its height.
     """
@@ -18,7 +17,6 @@ class Plant:
     def grow(self, value):
         """
         Increase the plant height.
-
         If the value is negative, a warning is printed and
         the height is not modified.
         """
@@ -31,18 +29,13 @@ class Plant:
     def score_value(self):
         """
         Return the score value of the plant.
-
         The score is equal to the plant height.
-
-        Returns:
-            int or float: Plant score.
         """
         return self.height
 
     def get_info(self):
         """
         Print plant information.
-
         Displays the plant name and height.
         """
         print(f"{self.name}: {self.height}cm")
@@ -51,7 +44,6 @@ class Plant:
 class FloweringPlant(Plant):
     """
     Represents a plant that can produce flowers.
-
     Extends Plant by adding flower color and blooming state.
     """
     def __init__(self, name, height, color, is_blooming):
@@ -65,9 +57,7 @@ class FloweringPlant(Plant):
     def bloom(self):
         """
         Set the plant as blooming.
-
-        If the plant is not blooming, the blooming state
-        becomes True.
+        If the plant is not blooming, the blooming state becomes True.
         """
         if not self.is_blooming:
             self.is_blooming = True
@@ -75,7 +65,6 @@ class FloweringPlant(Plant):
     def get_info(self):
         """
         Print flowering plant information.
-
         Displays name, height, flower color and blooming state.
         """
         print(f"{self.name}: {self.height}cm, {self.color} flowers", end=" ")
@@ -86,7 +75,6 @@ class FloweringPlant(Plant):
 class PrizeFlower(FloweringPlant):
     """
     Represents a flowering plant that can earn prize points.
-
     Extends FloweringPlant by adding prize points that
     increase the plant score.
     """
@@ -106,20 +94,14 @@ class PrizeFlower(FloweringPlant):
     def score_value(self):
         """
         Return the total score of the plant.
-
         The score is the sum of height and prize points.
-
-        Returns:
-            int or float: Total score.
         """
         return self.height + self.prize_points
 
     def get_info(self):
         """
         Print prize flower information.
-
-        Displays name, height, flower color, blooming state,
-        and prize points.
+        Displays name, height, flower color, blooming state, and prize points.
         """
         print(f"{self.name}: {self.height}cm, {self.color} flowers", end=" ")
         if self.is_blooming:
@@ -132,7 +114,6 @@ class PrizeFlower(FloweringPlant):
 class GardenManager:
     """
     Manages a collection of plants belonging to a garden owner.
-
     Tracks plants, growth activity and garden statistics.
     """
     total_gardens = 0
@@ -150,7 +131,6 @@ class GardenManager:
     def add_plant(self, plant):
         """
         Add a plant to the garden.
-
         Only Plant instances or subclasses are accepted.
         """
         if not isinstance(plant, Plant):
@@ -163,7 +143,6 @@ class GardenManager:
     def help_grow(self, value):
         """
         Grow all plants in the garden.
-
         Each plant increases its height by the given value.
         """
         print(f"\n{self.owner} is helping all plants grow...")
@@ -174,9 +153,6 @@ class GardenManager:
     def calculate_score(self):
         """
         Calculate the total garden score.
-
-        Returns:
-            int or float: Sum of all plant scores.
         """
         return sum(plant.score_value() for plant in self.plant_list)
 
@@ -184,8 +160,6 @@ class GardenManager:
     def create_garden_network(cls, owners):
         """
         Create multiple gardens from a list of owners.
-        Returns:
-            list[GardenManager]: List of created gardens.
         """
         gardens = []
 
@@ -198,9 +172,6 @@ class GardenManager:
     def validate_height(height):
         """
         Validate a plant height value.
-
-        Returns:
-            bool: True if height is positive.
         """
         return height > 0
 
@@ -212,9 +183,6 @@ class GardenManager:
         def count_types(plant_list):
             """
             Count plant types in a list.
-
-            Returns:
-                tuple: (regular, flowering, prize)
             """
             regular = 0
             flower = 0
@@ -234,22 +202,12 @@ class GardenManager:
         def calculate_garden_scores(plant_list):
             """
             Calculate the total score of a plant list.
-
-            Returns:
-                int or float: Total score.
             """
             return sum(plant.score_value() for plant in plant_list)
 
     def generate_report(self):
         """
         Print a detailed garden report.
-
-        Includes:
-        - Plant list
-        - Plants added
-        - Total growth
-        - Plant type counts
-        - Height validation test
         """
         print(f"\n=== {self.owner}'s Garden Report ===", end="\n")
         print("Plants in garden:")

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-def check_temperature(temp_str):
+def check_temperature(temp_str: str) -> int:
     '''Check temperature and manage errors'''
     print(f"Testing temperature: {temp_str}")
     try:
@@ -21,7 +21,7 @@ def check_temperature(temp_str):
     return temp
 
 
-def test_temperature_input():
+def test_temperature_input() -> None:
     '''Test a set of temperature values'''
     print("=== Garden Temperature Checker ===", end="\n\n")
     test_temp = ["25", "abc", "50", "-105"]
@@ -31,4 +31,6 @@ def test_temperature_input():
     print("All test completed - program didn't crash!")
 
 
-test_temperature_input()
+if __name__ == "__main__":
+    '''Demo Method'''
+    test_temperature_input()
