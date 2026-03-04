@@ -18,19 +18,19 @@ class WaterError(GardenError):
         super().__init__(message)
 
 
-def check_plants(status):
+def check_plants(status: str) -> None:
     """Raise PlantError if plant status indicates a problem."""
     if status == "wilting":
         raise PlantError("The tomato plant is wilting!")
 
 
-def check_water(level):
+def check_water(level: int) -> None:
     """Raise WaterError if water level is below threshold."""
     if level < 10:
         raise WaterError("Not enough water in the tank!")
 
 
-def main():
+def main() -> None:
     """Demonstrate custom garden error handling."""
     print("=== Custom Garden Errors Demo ===")
 

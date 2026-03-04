@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 def check_plant_health(plant_name: str, water_level: int,
-                       sunlight_hours: str):
+                       sunlight_hours: str) -> None:
     """Validate inputs and report plant health status."""
     try:
         if plant_name is None:
             raise ValueError("Plant name cannot be empty")
     except ValueError as error:
         print(f"Error: {error}")
-        return
     try:
         if water_level > 10:
             raise ValueError(
@@ -18,7 +17,6 @@ def check_plant_health(plant_name: str, water_level: int,
                 f"Water level {water_level} is too low (min 1)")
     except ValueError as error:
         print(f"Error: {error}")
-        return
     try:
         if sunlight_hours < 2:
             raise ValueError(
@@ -28,7 +26,6 @@ def check_plant_health(plant_name: str, water_level: int,
                  f"Sunlight hours {sunlight_hours} is too low (max 16)")
     except ValueError as error:
         print(f"Error: {error}")
-        return
     print(f"Plant '{plant_name}' is healthy!")
 
 

@@ -3,21 +3,20 @@
 
 class GardenError(Exception):
     """Base class for all garden-related errors."""
-    # def __init__(self, message = "Caught a garden error"):
-        # self.message = message
-        # super().__init__(message)
     pass
+
 
 class PlantError(GardenError):
     """Error related to plant-specific problems."""
-    def __init__(self, message = "Plant Error"):
+    def __init__(self, message="Plant Error"):
         super().__init__(message)
 
 
 class WaterError(GardenError):
     """Error related to watering issues."""
-    def __init__(self, message = "Watering error"):
+    def __init__(self, message="Watering error"):
         super().__init__(message)
+
 
 class Sunlight(GardenError):
     """Error related to sunlight hours issues."""
@@ -30,21 +29,19 @@ class GardenManager():
         self.garden = []
         self.water_tank: int
 
-
     def add_plants(self, plant_name: str, plant_water: int,
                    sunlight_hour: int) -> None:
         try:
             if plant_name is not None or plant_name != "":
-                plant = {"name" : plant_name,
-                    "water": plant_water,
-                    "sun": sunlight_hour}
+                plant = {"name": plant_name,
+                         "water": plant_water,
+                         "sun": sunlight_hour}
                 self.garden.append(plant)
                 print(f"Added {plant_name} successfully")
             else:
                 raise PlantError("Plant name cannot be empty")
         except PlantError as error:
             print(f"Error adding plant: {error}")
-
 
     def water_plants(self, plant_name: str, water_level: int) -> None:
         try:
@@ -60,9 +57,8 @@ class GardenManager():
         finally:
             print("Closing watering system (cleanup)")
 
-
     def check_plant_health(self, plant_name: str, water_level: int,
-                            sunlight_hours: str) -> None:
+                           sunlight_hours: str) -> None:
         try:
             if plant_name is None:
                 raise ValueError("Plant name cannot be empty")
@@ -92,7 +88,7 @@ class GardenManager():
         print(f"Plant '{plant_name}' is healthy!")
 
 
-def test_plant_checks():
+def test_plant_checks() -> None:
     print("=== Garden Management System ===")
     print("\nAdding plants to garden...")
     demo_garden = GardenManager()

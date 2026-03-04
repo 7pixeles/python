@@ -37,7 +37,7 @@ def garden_operations(n_plants: int, plants: dict, target_height: str,
         print(message)
 
 
-def test_error_types():
+def test_error_types() -> None:
     """
     Demonstrates different Python exception types and shows that
     the program continues running after handling each error.

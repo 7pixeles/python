@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def water_plants(plant_list: list):
+def water_plants(plant_list: list) -> None:
     """Water each plant and ensure system cleanup."""
     print("Opening watering system")
     try:
@@ -14,7 +14,7 @@ def water_plants(plant_list: list):
         print("Closing watering system (cleanup)")
 
 
-def test_watering_system():
+def test_watering_system() -> None:
     """Test watering with valid and invalid inputs."""
     print("=== Garden Watering System ===")
     print("\nTesting normal watering...")
