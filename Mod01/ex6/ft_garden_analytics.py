@@ -233,7 +233,7 @@ if __name__ == "__main__":
     print("=== Garden Management System Demo ===\n")
 
     # Create gardens
-    gardens = GardenManager.create_garden_network(["Ana", "Bob"])
+    gardens = GardenManager.create_garden_network(["Alice", "Bob"])
 
     # Add plants to gardens
     gardens[0].add_plant(Plant("Oat Tree", 45))
