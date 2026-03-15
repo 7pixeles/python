@@ -1,32 +1,4 @@
 #!/usr/bin/env python3
-'''
-Sets: Conjunto de datos donde cada elemento solo puede existir una vez
-    - Eliminan duplicados automáticamente
-    - Operaciones matemáticamente claras:
-        - Unión == combinar
-        - Intersección == coincidencias
-        - Diferencia == exclusividades
-===============================================================================
-Union: Combina todo lo existente en varios conjuntos
-
-Intersección: Encuentra los datos que tienen en común los sets
-    Uso para localizar:
-        - Comportamientos comunes
-        - Usuarios compartidos
-        - Eventos coincidentes
-
-Diferencia: Encuentra lo que sólo pertenece a un conjunto
-    Usado para localizar:
-        - Diferencia entre grupos
-        - Características exclusivas
-        - Elementos faltantes
-    Un logro es raro si aparece exactamente una vez entre los sets.
-    En análisis de datos se parece mucho a detectar:
-        - outliers
-        - Eventos únicos
-        - Comportamientos raros
-'''
-
 
 class Player:
     def __init__(self, name: str, achieve: set):
