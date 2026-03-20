@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
+"""
+Process player scores from command-line arguments and display basic statistics.
 
+Converts the provided scores to integers and prints total, average,
+minimum, maximum, and score range.
+"""
 import sys
 
 if __name__ == "__main__":
     scores = sys.argv[1:]
-    int_scores = []
 
     print("=== Player Score Analytics === \n")
     if len(scores) == 0:
@@ -12,12 +16,7 @@ if __name__ == "__main__":
               "Usage python3 ft_score_analytics.py <score1> <score2> ...")
     else:
         try:
-
-            # int_scores = [int(score) for score in scores]
-
-            for score in scores:
-                int_scores.append(int(score))
-
+            int_scores = [int(score) for score in scores]
             print("Scores processed:", int_scores)
             print("Total players:", len(int_scores))
             print("Total score:", sum(int_scores))

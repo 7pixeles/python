@@ -1,8 +1,23 @@
 #!/usr/bin/env python3
+"""
+Inventory management and analysis system.
+
+Provides utilities to parse item quantities, categorize items,
+display inventory statistics, and suggest restocking.
+"""
 import sys
+from typing import List, Dict
 
 
-def parse_args(args: list) -> dict:
+def parse_args(args: List[str]) -> Dict[str, int]:
+    """Parse command-line arguments into an inventory dictionary.
+
+    Args:
+        args: List of strings formatted as 'item:quantity'.
+
+    Returns:
+        Dictionary mapping item names to total quantities.
+    """
     inventory = {}
 
     for arg in args:
@@ -23,11 +38,19 @@ def parse_args(args: list) -> dict:
     return inventory
 
 
-def categorize_items(inventory: dict) -> dict:
+def categorize_items(inventory: Dict[str, int]) -> Dict[str, Dict[str, int]]:
+    """Categorize inventory items by quantity levels.
+
+    Args:
+        inventory: Dictionary of item names to quantities.
+
+    Returns:
+        Dictionary with categories 'Scarce', 'Moderate', 'Legendary'.
+    """
     categories = {
         "Moderate": {},
         "Scarce": {},
-        "Abundant": {}
+        "Legendary": {}
     }
     for value, qty in inventory.items():
         if qty <= 4:
@@ -35,11 +58,13 @@ def categorize_items(inventory: dict) -> dict:
         elif qty >= 5 and qty < 10:
             categories["Moderate"].update({value: qty})
         else:
-            categories["Abundant"].update({value: qty})
+            categories["Legendary"].update({value: qty})
     return categories
 
 
-def current_invent(inventory: dict) -> None:
+def current_invent(inventory: Dict[str, int]) -> None:
+    """Print current inventory with quantities and percentage of total."""
+
     total = sum(inventory.values())
     for item, qty in inventory.items():
         percentage = (qty / total) * 100
@@ -47,7 +72,8 @@ def current_invent(inventory: dict) -> None:
         print(f"{item}: {qty} {unit_label} ({percentage:.1f}%)")
 
 
-def get_max_value(inventory: dict) -> None:
+def get_max_value(inventory: Dict[str, int]) -> None:
+    """Print the item with the highest quantity in the inventory."""
     max_value = ""
     max_qty = 0
     for value, qty in inventory.items():
@@ -55,10 +81,12 @@ def get_max_value(inventory: dict) -> None:
             max_qty = qty
             max_value = value
     unit_label = "unit" if max_qty == 1 else "units"
-    print(f"Most abundant: {max_value} ({max_qty} {unit_label})")
+    print(f"Most Legendary: {max_value} ({max_qty} {unit_label})")
 
 
-def get_min_value(inventory: dict) -> None:
+def get_min_value(inventory: Dict[str, int]) -> None:
+    """Print the item with the lowest quantity in the inventory."""
+
     min_value = None
     min_qty = None
     for value, qty in inventory.items():
@@ -66,22 +94,21 @@ def get_min_value(inventory: dict) -> None:
             min_value = value
             min_qty = qty
     unit_label = "unit" if min_qty == 1 else "units"
-    print(f"Least abundant: {min_value} ({min_qty} {unit_label})")
+    print(f"Least Legendary: {min_value} ({min_qty} {unit_label})")
 
 
-def get_restock(inventory: dict) -> list:
-    need_restock = []
-    for item, qty in inventory.items():
-        if qty < 2:
-            need_restock.append(item)
-    return need_restock
+def get_restock(inventory: Dict[str, int]) -> List[str]:
+    """Return a list of items that need restocking (quantity < 2)."""
+
+    return [item for item, qty in inventory.items() if qty < 2]
 
 
-def is_in_inventory(inventory: dict, word: str) -> str:
-    if word in inventory:
-        return ("True")
-    else:
-        return ("False")
+def is_in_inventory(inventory: Dict[str, int], word: str) -> str:
+    """Check if an item exists in the inventory.
+    Returns:
+        'True' if the item exists, 'False' otherwise.
+    """
+    return "True" if word in inventory else "False"
 
 
 if __name__ == "__main__":
@@ -111,4 +138,5 @@ if __name__ == "__main__":
     word = "sword"
     print("Dictionary keys:", ", ".join(inventory.keys()))
     print("Dictionary values:", *list(inventory.values()))
-    print(f"Sample lookup - '{word}' in inventory: {is_in_inventory(inventory, word)}")
+    print(f"Sample lookup - '{word}' in inventory:",
+          "{is_in_inventory(inventory, word)}")

@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
-import sys
+"""
+Display the program name and command-line arguments.
 
+If no arguments are provided, prints a warning.
+Otherwise, prints each argument and the total count.
+"""
+
+import sys
 
 if __name__ == "__main__":
     print("=== Command Quest ===\n ")
