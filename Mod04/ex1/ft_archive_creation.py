@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def create_archive() -> str | None:
+def create_archive() -> str:
     """
     Creates a new archive file with preset data.
 
@@ -11,17 +11,18 @@ def create_archive() -> str | None:
     file_name = "new_discovery.txt"
     print(f"\nInitializing new storage unit: {file_name}")
     try:
-        with open(file_name, "w") as file:
-            print("Storage unit created successfully...")
-            print("\nInscribing preservation data...")
+        file = open(file_name, "w")
+        print("Storage unit created successfully...")
+        print("\nInscribing preservation data...")
 
-            content = (
-                "[ENTRY 001] New quantum algorithm discovered\n"
-                "[ENTRY 002] Efficiency increased by 347%\n"
-                "[ENTRY 003] Archived by Data Archivist trainee"
-            )
-            file.write(content)
-
+        content = (
+            "[ENTRY 001] New quantum algorithm discovered\n"
+            "[ENTRY 002] Efficiency increased by 347%\n"
+            "[ENTRY 003] Archived by Data Archivist trainee"
+        )
+        print(file_name)
+        file.write(content)
+        file.close()
         return (file_name)
 
     except OSError:
@@ -40,16 +41,17 @@ def read_archive(file_name: str) -> None:
         None
     """
     try:
-        with open(file_name, "r") as file:
-            content = file.read()
+        file = open(file_name, "r")
+        content = file.read()
 
-            if not content:
-                print("Archive is empty.")
-            else:
-                print(content)
+        if not content:
+            print("Archive is empty.")
+        else:
+            print(content)
 
         print("\nData inscription complete. Storage unit sealed.")
         print(f"Archive '{file_name}' ready for long-term preservation.")
+        file.close()
 
     except OSError:
         print("ERROR: Unable to read archive")
