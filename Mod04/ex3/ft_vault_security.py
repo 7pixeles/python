@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
 def security_system():
+    """
+    Simulates secure vault access by reading classified data
+    and writing new security protocol entries.
+    """
     print("[SECURE ACCESS] Attempting vault connection...")
     print("[ACCESS GRANTED] Classified data retrieved successfully")
     try:
