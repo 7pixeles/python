@@ -208,6 +208,8 @@ __marimo__/
 
 # Subjects
 subjects/
+.pdf
 
 #DS_Store
 .DS_Store
+
