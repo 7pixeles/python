@@ -17,7 +17,7 @@ class Plant:
         day (int): Age in days.
     """
 
-    def __init__(self, name, height, day):
+    def __init__(self, name, height, age):
         """
         Initializes a new Plant instance.
 
@@ -28,7 +28,10 @@ class Plant:
         """
         self.name = name
         self.height = height
-        self.day = day
+        self.age = age
+
+    def show(self):
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 if __name__ == "__main__":
@@ -40,6 +43,6 @@ if __name__ == "__main__":
     p3 = Plant("Cactus", 15, 120)
 
     print("=== Garden Plant Registry ===")
-    print(f"{p1.name}: {p1.height}cm, {p1.day} days old")
-    print(f"{p2.name}: {p2.height}cm, {p2.day} days old")
-    print(f"{p3.name}: {p3.height}cm, {p3.day} days old")
+    p1.show()
+    p2.show()
+    p3.show()

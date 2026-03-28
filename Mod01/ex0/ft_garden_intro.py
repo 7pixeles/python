@@ -13,7 +13,6 @@ if __name__ == "__main__":
     age = 30
     print("=== Welcome to My Garden ===")
     print("Plant:", name)
-
     print("Height:", height)
     print("Age:", age, "days")
     print("\n=== End of Program ===")
