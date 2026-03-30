@@ -1,222 +1,134 @@
 #!/usr/bin/env python3
-"""
-Module ft_plant_types.
-
-Defines a hierarchy of plant types for a garden simulation.
-
-Classes:
-    Plant: Base class for all plant types, providing common attributes.
-    Flower: Represents flowering plants that can bloom and change color.
-    Tree: Represents trees that calculate shade area based on trunk diameter.
-    Vegetable: Represents vegetables with harvest season and nutritional value.
-
-Usage:
-    This module can be run as a script to demonstrate plant growth behavior
-    and display information for each plant type.
-
-Notes:
-    - The Plant base class is not meant to be instantiated directly.
-    - Subclasses implement their specific grow behavior.
-    - COLORS is a shared constant used for flower color selection.
-"""
-
-COLORS = ["red", "white", "yellow", "pink", "purple", "orange"]
-
 
 class Plant:
-    """
-    Base class for all plants.
-
-    Represents common attributes shared by every plant type.
-
-    Attributes:
-        name (str): Plant name.
-        height (int): Height in centimeters.
-        day (int): Age of the plant in days.
-
-    Notes:
-        This class is not meant to be instantiated directly.
-        Subclasses must implement `grow()`.
-    """
-    def __init__(self, name, height, day):
+    def __init__(self, name: str, height: float, age: int) -> None:
         """
         Initialize a Plant instance.
 
         Args:
             name (str): Name of the plant.
-            height (int): Height in centimeters.
-            day (int): Age in days.
+            height (float): Height in centimeters.
+            age (int): Age in days.
         """
-        self.name = name
-        self.height = height
-        self.day = day
+        self.name: str = name
+        self.height: float = height
+        self.age: int = age
+
+    def get_info(self) -> None:
+        print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
+
+    def grow(self) -> None:
+        pass
+
+    def age_up(self, days: int) -> None:
+        self.age += days
 
 
 class Flower(Plant):
-    """
-    Flower plant type.
+    def __init__(self, name: str, height: float, age: int, color: str) -> None:
+        super().__init__(name, height, age)
+        self.color: str = color
+        self.blooming: bool = False
 
-    Flowers change color when growing. The color is selected deterministically
-    based on plant age and height.
+    def bloom(self) -> None:
+        print(f"[asking the {self.name} to bloom]")
+        self.blooming = True
 
-    Attributes:
-        color (str): Current flower color.
-    """
+    def get_info(self) -> None:
+        super().get_info()
+        print(f"Color: {self.color}")
 
-    def __init__(self, name, height, day, color):
-        """
-        Create a Flower.
-
-        Args
-             name (str): Flower name.
-            - height (int): Height in centimeters.
-            - day (int): Age in days.
-            - color (str): Initial color.
-        """
-        super().__init__(name, height, day)
-        self.color = color
-
-    def bloom(self):
-        """
-        Update flower color.
-
-        The color index is computed as:
-
-            (day + height) % len(COLORS)
-
-        This guarantees a valid index while producing predictable variation.
-
-        Side effects:
-            Mutates self.color.
-        """
-        index = (self.day + self.height) % len(COLORS)
-        self.color = COLORS[index]
-
-    def grow(self):
-        """
-        Trigger flower growth behavior.
-
-        Currently implemented as blooming (color change).
-        """
-        self.bloom()
-
-    def get_info(self):
-        """
-        Print flower information to standard output.
-        """
-        print(f"{self.name} (Flower): {self.height}cm, {self.day} days, "
-              f"{self.color} color")
-        print(f"{self.name} is blooming beautifully!")
+        if not self.blooming:
+            print(f"{self.name} has not bloomed yet")
+        else:
+            print(f"{self.name} is blooming beautifully!")
 
 
 class Tree(Plant):
-    """
-    Tree plant type.
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        age: int,
+        trunk_diameter: float
+    ) -> None:
 
-    Trees compute the amount of shade they provide based on trunk diameter.
+        super().__init__(name, height, age)
+        self.trunk_diameter: float = trunk_diameter
+        self.shade: bool = False
 
-    Attributes:
-        trunk_diameter (float): Diameter of the trunk in centimeters.
-        shade (float): Calculated shade area in square meters (after grow()).
-    """
-    def __init__(self, name, height, day, trunk_diameter):
-        """
-        Create a Tree.
+    def produce_shade(self) -> None:
+        print(f"[asking the {self.name} to produce shade]")
+        self.shade = True
 
-        Args:
-            name (str): Tree name.
-            height (int): Height in centimeters.
-            day (int): Age in days.
-            trunk_diameter (float): Trunk diameter in centimeters.
-        """
-        super().__init__(name, height, day)
-        self.trunk_diameter = trunk_diameter
+    def get_info(self) -> None:
+        super().get_info()
+        print(f"Trunk diameter: {round(self.trunk_diameter, 1)}cm")
 
-    def produce_shade(self):
-        """
-        Calculate shade area.
-
-        Shade is approximated using a simplified circle area formula:
-
-            area = 31416 * radius²
-
-        where radius is trunk_diameter converted to meters.
-
-        Side effects:
-            Sets self.shade.
-        """
-        radius = self.trunk_diameter / 1000
-        self.shade = 31416 * radius ** 2
-
-    def grow(self):
-        """
-        Trigger tree growth behavior.
-
-        Currently implemented as shade calculation.
-        """
-        self.produce_shade()
-
-    def get_info(self):
-        """
-        Print tree information to standard output.
-        """
-        print(f"{self.name} (Tree): {self.height}cm, {self.day} days, "
-              f"{self.trunk_diameter} cm diameter")
-        print(f"{self.name} provides {self.shade:.0f} square meters of shade")
+        if self.shade:
+            print(
+                f"Tree {self.name} now produces a shade of "
+                f"{round(self.height, 1)}cm long and "
+                f"{round(self.trunk_diameter, 1)}cm wide."
+            )
 
 
 class Vegetable(Plant):
-    """
-    Vegetable plant type.
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        age: int,
+        harvest_season: str
+    ) -> None:
 
-    Vegetables store harvest season and nutritional value.
+        super().__init__(name, height, age)
+        self.harvest_season: str = harvest_season
+        self.nutritional_value: int = 0
 
-    Growth logic is intentionally left unimplemented.
-    """
-    def __init__(self, name, height, day, harvest_season, nutritional_value):
-        """
-        Create a Vegetable.
+    def grow(self) -> None:
+        self.height += 2
+        self.nutritional_value += 1
 
-        Args:
-            name (str): Vegetable name.
-            height (int): Height in centimeters.
-            day (int): Age in days.
-            harvest_season (str): Harvest season.
-            nutritional_value (str): Main nutritional benefit.
-        """
-        super().__init__(name, height, day)
-        self.harvest_season = harvest_season
-        self.nutritional_value = nutritional_value
+    def age_up(self, days: int) -> None:
+        super().age_up(days)
+        self.nutritional_value += days
 
-    def grow(self):
-        """
-        Vegetable growth placeholder.
-
-        Currently does nothing.
-        """
-        pass
-
-    def get_info(self):
-        """
-        Print vegetable information to standard output.
-        """
-        print(f"{self.name} (Vegetable): {self.height}cm, {self.day} days, "
-              f"{self.harvest_season} harvest")
-        print(f"{self.name} is rich in {self.nutritional_value}")
+    def get_info(self) -> None:
+        super().get_info()
+        print(f"Harvest season: {self.harvest_season}")
+        print(f"Nutritional value: {self.nutritional_value}")
 
 
 if __name__ == "__main__":
     plants = [
-        Flower("Rose", 25, 30, "Red"),
+        Flower("Rose", 15, 10, "Red"),
         Flower("Sunflower", 80, 45, "Yellow"),
-        Tree("Oak", 15, 120, 50),
-        Tree("Eucaliptus", 200, 12, 64),
-        Vegetable("Tomato", 2, 1, "Winter", "Vitamin C"),
-        Vegetable("Peas", 2, 1, "Summer", "Iron")
+        Vegetable("Tomato", 5, 10, "April"),
+        Vegetable("Peas", 5, 10, "June"),
+        Tree("Oak", 200, 365, 5),
+        Tree("Pine", 150, 200, 3),
     ]
 
-    print("\n === Garden Plant Types === \n")
+    print("\n=== Garden Plant Types ===")
+
     for plant in plants:
-        plant.grow()
-        plant.get_info()
-        print("--------------------------------------------------")
+
+        if isinstance(plant, Flower):
+            print("\n=== Flower ===")
+            plant.get_info()
+            plant.bloom()
+            plant.get_info()
+
+        elif isinstance(plant, Tree):
+            print("\n=== Tree ===")
+            plant.get_info()
+            plant.produce_shade()
+            plant.get_info()
+
+        elif isinstance(plant, Vegetable):
+            print("\n=== Vegetable ===")
+            plant.get_info()
+            plant.grow()
+            plant.age_up(20)
+            plant.get_info()

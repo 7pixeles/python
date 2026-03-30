@@ -1,25 +1,11 @@
 #!/usr/bin/env python3
 
 class Plant:
-    """
-    Represents a basic plant with a name and height.
-    A Plant can grow over time and provides a score value
-    based on its height.
-    """
-
     def __init__(self, name, height):
-        """
-        Initialize a Plant instance.
-        """
         self.name = name
         self.height = height
 
     def grow(self, value):
-        """
-        Increase the plant height.
-        If the value is negative, a warning is printed and
-        the height is not modified.
-        """
         if value < 0:
             print("[WARNING] Height must have a positive value.")
         else:
@@ -27,82 +13,41 @@ class Plant:
             print(f"{self.name} grew {value}cm")
 
     def score_value(self):
-        """
-        Return the score value of the plant.
-        The score is equal to the plant height.
-        """
         return self.height
 
     def get_info(self):
-        """
-        Print plant information.
-        Displays the plant name and height.
-        """
         print(f"{self.name}: {self.height}cm")
 
 
 class FloweringPlant(Plant):
-    """
-    Represents a plant that can produce flowers.
-    Extends Plant by adding flower color and blooming state.
-    """
     def __init__(self, name, height, color, is_blooming):
-        """
-        Initialize a FloweringPlant instance.
-        """
         super().__init__(name, height)
         self.color = color
         self.is_blooming = is_blooming
 
     def bloom(self):
-        """
-        Set the plant as blooming.
-        If the plant is not blooming, the blooming state becomes True.
-        """
         if not self.is_blooming:
             self.is_blooming = True
 
     def get_info(self):
-        """
-        Print flowering plant information.
-        Displays name, height, flower color and blooming state.
-        """
         print(f"{self.name}: {self.height}cm, {self.color} flowers", end=" ")
         if self.is_blooming:
             print("(blooming)")
 
 
 class PrizeFlower(FloweringPlant):
-    """
-    Represents a flowering plant that can earn prize points.
-    Extends FloweringPlant by adding prize points that
-    increase the plant score.
-    """
     def __init__(self, name, height, color, is_blooming, prize_points):
-        """
-        Initialize a PrizeFlower instance.
-        """
         super().__init__(name, height, color, is_blooming)
         self.prize_points = prize_points
 
     def add_prize_points(self, value):
-        """
-        Add prize points to the plant.
-        """
+
         self.prize_points += value
 
     def score_value(self):
-        """
-        Return the total score of the plant.
-        The score is the sum of height and prize points.
-        """
         return self.height + self.prize_points
 
     def get_info(self):
-        """
-        Print prize flower information.
-        Displays name, height, flower color, blooming state, and prize points.
-        """
         print(f"{self.name}: {self.height}cm, {self.color} flowers", end=" ")
         if self.is_blooming:
             print("(blooming)", end=", ")
@@ -112,16 +57,9 @@ class PrizeFlower(FloweringPlant):
 
 
 class GardenManager:
-    """
-    Manages a collection of plants belonging to a garden owner.
-    Tracks plants, growth activity and garden statistics.
-    """
     total_gardens = 0
 
     def __init__(self, owner):
-        """
-        Initialize a GardenManager instance.
-        """
         self.owner = owner
         self.plant_list = []
         self.plants_added = 0
@@ -129,10 +67,6 @@ class GardenManager:
         GardenManager.total_gardens += 1
 
     def add_plant(self, plant):
-        """
-        Add a plant to the garden.
-        Only Plant instances or subclasses are accepted.
-        """
         if not isinstance(plant, Plant):
             print("[WARNING] You cannot add a plant that does not exist.")
         else:
@@ -141,26 +75,16 @@ class GardenManager:
             print(f"Added {plant.name} to {self.owner}'s garden")
 
     def help_grow(self, value):
-        """
-        Grow all plants in the garden.
-        Each plant increases its height by the given value.
-        """
         print(f"\n{self.owner} is helping all plants grow...")
         for plant in self.plant_list:
             plant.grow(value)
             self.total_growth += value
 
     def calculate_score(self):
-        """
-        Calculate the total garden score.
-        """
         return sum(plant.score_value() for plant in self.plant_list)
 
     @classmethod
     def create_garden_network(cls, owners):
-        """
-        Create multiple gardens from a list of owners.
-        """
         gardens = []
 
         for owner in owners:
@@ -170,20 +94,11 @@ class GardenManager:
 
     @staticmethod
     def validate_height(height):
-        """
-        Validate a plant height value.
-        """
         return height > 0
 
     class GardenStats():
-        """
-        Utility class for garden statistics calculations.
-        """
         @staticmethod
         def count_types(plant_list):
-            """
-            Count plant types in a list.
-            """
             regular = 0
             flower = 0
             prize = 0
@@ -200,15 +115,9 @@ class GardenManager:
 
         @staticmethod
         def calculate_garden_scores(plant_list):
-            """
-            Calculate the total score of a plant list.
-            """
             return sum(plant.score_value() for plant in plant_list)
 
     def generate_report(self):
-        """
-        Print a detailed garden report.
-        """
         print(f"\n=== {self.owner}'s Garden Report ===", end="\n")
         print("Plants in garden:")
 
@@ -230,7 +139,7 @@ class GardenManager:
 
 
 if __name__ == "__main__":
-    print("=== Garden Management System Demo ===\n")
+    print("=== Garden Statistics ===\n")
 
     # Create gardens
     gardens = GardenManager.create_garden_network(["Alice", "Bob"])

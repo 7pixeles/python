@@ -23,7 +23,7 @@ class Plant:
     total_plants = 0
     """Total number of Plant instances created."""
 
-    def __init__(self, name, height, day):
+    def __init__(self, name: str, height: float, age: int):
         """
         Initializes a new Plant instance.
 
@@ -34,14 +34,14 @@ class Plant:
         """
         self.name = name
         self.height = height
-        self.day = day
+        self.age = age
         Plant.total_plants += 1
 
-    def get_info(self):
+    def show(self):
         """
         Prints the plant's information in a readable format.
         """
-        print(f"{self.name} ({self.height}cm, {self.day} days)")
+        print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
 
 
 if __name__ == "__main__":
@@ -49,15 +49,15 @@ if __name__ == "__main__":
     Demo block: creates multiple plants and prints their information.
     """
     plants = [
-        Plant("Rose", 25, 30),
-        Plant("Sunflower", 80, 45),
-        Plant("Cactus", 15, 120),
-        Plant("Eucaliptus", 200, 12),
-        Plant("Aloe Vera", 2, 1)
+        Plant("Rose", 24.99, 30),
+        Plant("Oak", 199.99, 365),
+        Plant("Cactus", 4.99, 90),
+        Plant("Sunflower", 80.99, 45),
+        Plant("Fern", 14.99, 120)
     ]
 
     print("=== Garden Plant Registry ===")
     for plant in plants:
         print("Created: ", end='')
-        plant.get_info()
+        plant.show()
     print("\nTotal plants created:", Plant.total_plants)

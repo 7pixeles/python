@@ -14,94 +14,91 @@ counter of created plants.
 class SecurePlant:
     """
     Represents a plant with protected attributes.
-
-    The class manages:
     - Plant name
     - Height (in centimeters)
     - Age (in days)
-
-    It also keeps track of the total number of plant instances created.
     """
 
-    total_plants = 0
-    """Total number of SecurePlant instances created."""
+    def __init__(self, name: str, height: float, age: int):
+        self._name = name
+        self._height = 0
+        self._age = 0
 
-    def __init__(self, name, height, age):
-        """
-        Initializes a new plant.
+        self.set_height(height)
+        self.set_age(age)
 
-        Args:
-            name (str): Name of the plant.
-            height (int | float): Initial height in centimeters.
-            age (int): Initial age in days.
-        """
-        self.__name = name
-        self.__height = height
-        self.__age = age
-        print(f"Plant created: {self.__name}")
-        SecurePlant.total_plants += 1
+        print(f"Plant created: {self._name}: "
+              f"{round(self._height, 1)}cm, {self._age} days\n")
 
-    @property
-    def height(self):
+    def _validate_height(self, value):
+        if not isinstance(value, (int, float)):
+            print(f"[ERROR] {self._name}: Height must be a number")
+            return False
+
+        if value < 0:
+            print(f"[ERROR] {self._name}: Height can't be negative")
+            return False
+
+        if value > 1000:
+            print(f"[ERROR] {self._name}: Height value unrealistic")
+            return False
+
+        return True
+
+    def get_height(self):
         """
         Returns the current height of the plant.
 
         Returns:
             int | float: Height in centimeters.
         """
-        print()
-        return self.__height
+        return self._height
 
-    @height.setter
-    def height(self, value):
-        """
-        Sets the height of the plant.
-
-        Only positive values are allowed.
-
-        Args:
-            value (int | float): New height in centimeters.
-        """
-        if value > 0:
-            self.__height = value
-            print(f"Height updated: {value}cm [OK]")
-        else:
-            print(f"Invalid operation attempted: height {value}cm [REJECTED]")
-            print("\nSecurity: Negative height rejected")
-
-    @property
-    def age(self):
+    def get_age(self):
         """
         Returns the current age of the plant.
 
         Returns:
             int: Age in days.
         """
-        return self.__age
+        return self._age
 
-    @age.setter
-    def age(self, value):
+    def set_height(self, new_height: float):
         """
-        Sets the age of the plant.
-
+        Sets the height of the plant.
         Only positive values are allowed.
 
         Args:
-            value (int): New age in days.
+            new_height (float): New height in centimeters.
         """
-        if value > 0:
-            self.__age = value
-            print(f"Age updated: {value} days [OK]")
+        if new_height >= 0:
+            self._height = new_height
+            print(f"Height updated: {new_height}cm")
         else:
-            print(f"Invalid operation attempted: age {value}cm [REJECTED]")
-            print("Security: Negative age rejected")
+            print(f"[ERROR] {self._name}: Height can't be negative")
+            print("Height update rejected")
+
+    def set_age(self, new_age):
+        """
+        Sets the age of the plant.
+        Only positive values are allowed.
+
+        Args:
+            new_age (int): New age in days.
+        """
+        if new_age >= 0:
+            self._age = new_age
+            print(f"Age updated: {new_age}cm")
+        else:
+            print(f"[ERROR] {self._name}: Age can't be negative")
+            print("Age update rejected")
 
     def get_info(self):
         """
         Prints the current information of the plant.
         """
-        print(f"\nCurrent Plant: {self.__name} ", end='')
-        print(f"({self.__height}cm, {self.__age} days)")
+        print(f"\nCurrent state: {self._name} "
+              f"({self._height}cm, {self._age} days)")
 
 
 if __name__ == "__main__":
@@ -112,6 +109,6 @@ if __name__ == "__main__":
     """
     print("=== Garden Security System ===")
     demo_plant = SecurePlant("Rose", 25, 30)
-    demo_plant.height = 5
-    demo_plant.age = 52
+    demo_plant.set_height(-5)
+    demo_plant.set_age(-2)
     demo_plant.get_info()

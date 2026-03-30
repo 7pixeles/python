@@ -14,23 +14,23 @@ class Plant:
     Attributes:
         name (str): Name of the plant.
         height (int | float): Height in centimeters.
-        day (int): Age in days.
+        age (int): Age in days.
     """
 
-    def __init__(self, name, height, day):
+    def __init__(self, name: str, height: float, age: int):
         """
         Initializes a new Plant instance.
 
         Args:
             name (str): Name of the plant.
             height (int | float): Initial height in centimeters.
-            day (int): Initial age in days.
+            age (int): Initial age in days.
         """
         self.name = name
         self.height = height
-        self.day = day
+        self.age = age
 
-    def grow(self, n):
+    def grow(self, n: float):
         """
         Increases the height of the plant.
 
@@ -39,34 +39,33 @@ class Plant:
         """
         self.height += n
 
-    def age(self, n):
+    def aging(self, n: int):
         """
         Increases the age of the plant.
 
         Args:
             n (int): Number of days to age the plant.
         """
-        self.day += n
+        self.age += n
 
     def get_info(self):
         """
         Prints the current state of the plant.
         """
-        print(f"{self.name}: {self.height}cm, {self.day} days old")
+        print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
 
 
 if __name__ == "__main__":
     """
     Demo of plant growth over a week.
     """
-    p1 = Plant("Rose", 25, 30)
-    end_age = p1.day + 7
+    print("=== Garden Plant Growth ===\n")
+    p1 = Plant("Rose", 25.00, 30)
     start_grow = p1.height
-    print("=== Day 1 ===")
-    p1.get_info()
-    while (p1.day < end_age):
-        p1.age(1)
-        p1.grow(3)
-    print("=== Day 7 ===")
-    p1.get_info()
-    print(f"Growth this week: {p1.height - start_grow} cm")
+    week = range(1, 8)
+    for day in week:
+        print(f"=== Day {day} ===")
+        p1.get_info()
+        p1.aging(1)
+        p1.grow(0.8)
+    print(f"\nGrowth this week: {round(p1.height - start_grow)}cm")
