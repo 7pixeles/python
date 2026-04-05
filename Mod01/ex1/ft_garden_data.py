@@ -1,48 +1,34 @@
 #!/usr/bin/env python3
-"""
-Module ft_garden_data
-
-Defines a basic Plant class with attributes for name, height, and age in days.
-Includes a demonstration of creating multiple plants and printing their info.
-"""
-
 
 class Plant:
     """
-    Represents a plant with a name, height, and age.
+    Represent a plant with basic attributes.
 
-    Attributes:
-        name (str): Name of the plant.
-        height (int | float): Height in centimeters.
-        day (int): Age in days.
+    Parameters
+    ----------
+    name : str
+        Plant name.
+    height : float
+        Height in centimeters.
+    age : int
+        Age in days.
     """
-
-    def __init__(self, name, height, age):
-        """
-        Initializes a new Plant instance.
-
-        Args:
-            name (str): Name of the plant.
-            height (int | float): Height in centimeters.
-            day (int): Age in days.
-        """
+    def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
         self.height = height
         self.age = age
 
-    def show(self):
+    def show(self) -> None:
+        """Display plant information."""
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 if __name__ == "__main__":
-    '''
-    Demo creating multiple plants and printing their information.
-    '''
-    p1 = Plant("Rose", 25, 30)
-    p2 = Plant("Sunflower", 80, 45)
-    p3 = Plant("Cactus", 15, 120)
-
     print("=== Garden Plant Registry ===")
-    p1.show()
-    p2.show()
-    p3.show()
+    plants = {
+        Plant("Rose", 25, 30),
+        Plant("Sunflower", 80, 45),
+        Plant("Cactus", 15, 120)
+    }
+    for plant in plants:
+        plant.show()
