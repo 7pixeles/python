@@ -1,36 +1,48 @@
 #!/usr/bin/env python3
 
 
-def check_temperature(temp_str: str) -> int:
-    '''Check temperature and manage errors'''
-    print(f"Testing temperature: {temp_str}")
-    try:
-        temp = int(temp_str)
-    except ValueError:
-        print(f"Error: '{temp_str}' is not a valid number", end="\n\n")
-        return None
+def input_temperature(temp_str: str) -> int:
+    '''
+    Convert a string to an integer temperature
 
-    if temp > 40:
-        print(f"Error: {temp}°C is too hot for plants (max 40ªC)", end="\n\n")
-        return None
-    elif temp < 0:
-        print(f"Error: {temp}°C is too cold for plants (min 0ªC)", end="\n\n")
-        return None
+    Parameters
+    ----------
+    temp_str : str
+        Input temperature as string
 
-    print(f"Temperature {temp}°C is perfect for plants!", end="\n\n")
-    return temp
+    Returns
+    -------
+    int
+        Converted temperature
+
+    Raises:
+    ------
+    ValueError
+        if conversion fails
+    '''
+
+    return int(temp_str)
 
 
-def test_temperature_input() -> None:
-    '''Test a set of temperature values'''
-    print("=== Garden Temperature Checker ===", end="\n\n")
-    test_temp = ["25", "abc", "50", "-105"]
+def test_temperature() -> None:
+    """
+    Test temperature conversion with valid and invalid inputs.
+    """
+    print("=== Garden Temperature ===\n")
 
-    for test in test_temp:
-        check_temperature(test)
+    test_temp = ["25", "abc"]
+
+    for value in test_temp:
+        print(f"Input data is '{value}'")
+        try:
+            temp = input_temperature(value)
+            print(f"Temperature is now {temp} ºC\n")
+        except ValueError as error:
+            print(f"Caught input_temperature error: {error} \n")
+
     print("All test completed - program didn't crash!")
 
 
 if __name__ == "__main__":
     '''Demo Method'''
-    test_temperature_input()
+    test_temperature()
