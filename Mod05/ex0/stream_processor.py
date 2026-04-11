@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-from typing import Any, List, Dict, Union, Optional
+from typing import Any
 from abc import ABC, abstractmethod
+
 
 class DataProcessor(ABC):
 
@@ -40,7 +41,7 @@ class NumericProcessor(DataProcessor):
             return False
         if not data:
             return False
-        return all(isinstance(each, (int,float)) for each in data)
+        return all(isinstance(each, (int, float)) for each in data)
 
 
 class TextProcessor(DataProcessor):
@@ -49,9 +50,11 @@ class TextProcessor(DataProcessor):
             return: True / False
         '''
         pass
+
     def process(self, data: Any) -> str:
         ''' cuenta longitud y palabras '''
         pass
+
     def format_output(self, result):
         '''Devuelve el resultado en una cadena válida'''
         pass
@@ -61,9 +64,10 @@ class LogProcess(DataProcessor):
     def validate(self, data: Any) -> bool:
         ''' Debe comprobar la conexión'''
         pass
-    def process(self, data: Any) -> str:
 
+    def process(self, data: Any) -> str:
         pass
+
     def format_output(self, result):
         pass
 

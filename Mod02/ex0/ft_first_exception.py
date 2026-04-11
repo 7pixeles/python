@@ -2,7 +2,7 @@
 
 
 def input_temperature(temp_str: str) -> int:
-    '''
+    """
     Convert a string to an integer temperature
 
     Parameters
@@ -19,7 +19,7 @@ def input_temperature(temp_str: str) -> int:
     ------
     ValueError
         if conversion fails
-    '''
+    """
 
     return int(temp_str)
 

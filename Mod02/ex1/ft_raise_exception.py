@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 def input_temperature(temp_str: str) -> int:
-    '''
+    """
     Convert a string to an integer temperature
 
     Parameters
@@ -18,7 +18,7 @@ def input_temperature(temp_str: str) -> int:
     ------
     ValueError
         if conversion fails
-    '''
+    """
     temp = int(temp_str)
 
     if temp > 40:
