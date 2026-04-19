@@ -7,125 +7,92 @@ along with utilities to process and summarize game streams.
 """
 
 from typing import Generator
+import random
 
-Event = tuple[int, str, int, str]
 
-
-def stream_processor(n: int) -> Generator[Event, None, None]:
-    """Yield a sequence of game events for n iterations.
-
-    Each event contains:
-        - event_id (int)
-        - player name (str)
-        - player level (int)
-        - event type (str)
+def gen_event() -> Generator[tuple, None, None]:
     """
-    players = ['alice', 'bob', 'charlie']
-    event_types = (
-        'found treasure',
-        'killed monster',
-        'leveled up'
-    )
-    for i in range(1, n + 1):
-        player = players[(i - 1) % 3]
-        level = (i * 7) % 20 + 1
-        event_type = event_types[(i - 1) % 3]
-        yield i, player, level, event_type
+    Generate an infinite stream of random game events.
 
+    Yields
+    ------
+    tuple of str
+        A tuple (player, action) representing a game event.
+    """
+    players = [
+        "Alice",
+        "Bob",
+        "Charlie",
+        "Dylan"
+        ]
 
-def fibonacci_stream(n: int) -> Generator[int, None, None]:
-    """Generate an infinite Fibonacci sequence."""
-    x = 0
-    y = 1
-
+    actions = [
+        "eat",
+        "sleep",
+        "climb",
+        "run",
+        "grab",
+        "swim",
+        "move",
+        "release",
+        "use"
+    ]
     while True:
-        yield x
-        x, y = y, x + y
+        player = random.choice(players)
+        action = random.choice(actions)
+        yield player, action
 
 
-def prime_stream() -> Generator[int, None, None]:
-    """Generate an infinite sequence of prime numbers."""
-    num = 2
-    while True:
-        is_prime = True
+def consume_event(events: list):
+    """
+    Yield random events from a list until it becomes empty.
 
-        for i in range(2, num):
-            if num % i == 0:
-                is_prime = False
-                break
+    Parameters
+    ----------
+    events : list of tuple
+        List of (player, action) events to consume.
 
-        if is_prime:
-            yield num
+    Yields
+    ------
+    tuple of str
+        Randomly selected event from the list.
 
-        num += 1
-
-
-def stream_analytics(
-        count_event: int,
-        high_level: int,
-        treasure: int,
-        level_up: int
-        ) -> None:
-    """Print summary statistics of processed game events."""
-
-    print("\n=== Stream Analytics ===")
-    print(f"Total events processed: {count_event}")
-    print(f"High-level players (10+): {high_level}")
-    print(f"Treasure events: {treasure}")
-    print(f"Level-up events: {level_up}")
-
-
-def generator_demo() -> None:
-    """Demonstrate Fibonacci and prime number generators."""
-    print("=== Generator Demonstration ===")
-    seq_fibo = fibonacci_stream(10)
-    fibo = [next(seq_fibo) for _ in range[10]]
-    print("Fibonacci sequence (first 10):", *fibo)
-
-    seq_prime = prime_stream()
-    prime = [next(seq_prime) for _ in range(5)]
-    print("Prime numbers (first 5):", *prime)
-
-
-def processing_stream(n: int) -> None:
-    """Process n game events, print first few, and summarize statistics."""
-    count_event = 0
-    count_high_level = 0
-    count_treasure = 0
-    count_level_up = 0
-
-    print(f"Processing {n} game events...\n")
-    for event_id, player, level, event in stream_processor(n):
-        count_event += 1
-        if level >= 10:
-            count_high_level += 1
-        if event == "found treasure":
-            count_treasure += 1
-        if event == "leveled up":
-            count_level_up += 1
-        if event_id <= 3:
-            print(f"Event {event_id}: Player {player} (level {level})"
-                  f" {event}")
-    print("...")
-
-    stream_analytics(
-        count_event,
-        count_high_level,
-        count_treasure,
-        count_level_up
-    )
-
-    print("\nMemory usage: Constant (streaming)")
-    print("Processing time [simulated]: 0.045 seconds")
+    Notes
+    -----
+    The function does not remove items from the list. External mutation
+    is required to eventually terminate the generator.
+    """
+    print(events)
+    while events:
+        random_item = random.choice(events)
+        yield random_item
 
 
 def main() -> None:
-    """Run the game event stream processor and generator demonstration."""
+    """
+    Run the game event stream processing demonstration.
 
+    Generates a sequence of random events, builds a list of events, and
+    consumes them using a generator to demonstrate streaming behavior.
+    """
     print("=== Game Data Stream Processor ===")
-    processing_stream(1000)
-    print()
-    generator_demo()
+    gen = gen_event()
+
+    for i in range(1000):
+        player, action = next(gen)
+        print(f"Event {i}: Player {player} did {action}")
+
+    ten_events = gen_event()
+    new_list = []
+    for _ in range(10):
+        item_events = next(ten_events)
+        new_list.append(item_events)
+    print(f"Built list of 10 events: {new_list}")
+    for random_item in consume_event(new_list):
+        print(f"Got event from list: {random_item}")
+        for random_item in new_list:
+            new_list.remove(random_item)
+        print(f"Remains in list: {new_list}")
 
 
 if __name__ == "__main__":
