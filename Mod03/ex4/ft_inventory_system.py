@@ -5,18 +5,6 @@ from typing import List, Dict
 
 
 def parse_args(args: List[str]) -> Dict[str, int]:
-    """Parse CLI args into an inventory dict.
-
-    Parameters
-    ----------
-    args : list of str
-        Items in 'name:quantity' format.
-
-    Returns
-    -------
-    dict of str to int
-        Parsed inventory with valid items.
-    """
     inventory = {}
 
     for arg in args:
@@ -44,13 +32,6 @@ def parse_args(args: List[str]) -> Dict[str, int]:
 
 
 def statistics_inventory(inventory: Dict[str, int]) -> None:
-    """Print percentage of each item in inventory.
-
-    Parameters
-    ----------
-    inventory : dict of str to int
-        Inventory with item quantities.
-    """
     total = sum(inventory.values())
 
     for item, qty in inventory.items():
@@ -59,14 +40,6 @@ def statistics_inventory(inventory: Dict[str, int]) -> None:
 
 
 def get_max_value(inventory: Dict[str, int]) -> None:
-    """Print item with highest quantity.
-
-    Parameters
-    ----------
-    inventory : dict of str to int
-        Inventory with item quantities.
-    """
-
     max_value = ""
     max_qty = 0
 
@@ -79,14 +52,6 @@ def get_max_value(inventory: Dict[str, int]) -> None:
 
 
 def get_min_value(inventory: Dict[str, int]) -> None:
-    """Print item with lowest quantity.
-
-    Parameters
-    ----------
-    inventory : dict of str to int
-        Inventory with item quantities.
-    """
-
     min_value = None
     min_qty = None
 

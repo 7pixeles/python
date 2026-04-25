@@ -1,24 +1,6 @@
 #!/usr/bin/env python3
 
 def input_temperature(temp_str: str) -> int:
-    """
-    Convert a string to an integer temperature
-
-    Parameters
-    ----------
-    temp_str : str
-        Input temperature as string
-
-    Returns
-    -------
-    int
-        Converted temperature
-
-    Raises:
-    ------
-    ValueError
-        if conversion fails
-    """
     temp = int(temp_str)
 
     if temp > 40:
@@ -30,9 +12,6 @@ def input_temperature(temp_str: str) -> int:
 
 
 def test_temperature() -> None:
-    """
-    Test temperature validation with multiple inputs.
-    """
     print("=== Garden Temperature Checker ===\n")
 
     tests = ["25", "abc", "100", "-50"]

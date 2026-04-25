@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""
-Process player scores from command-line arguments and display basic statistics.
 
-Converts the provided scores to integers and prints total, average,
-minimum, maximum, and score range.
-"""
 import sys
 
 if __name__ == "__main__":

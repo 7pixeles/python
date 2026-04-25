@@ -73,10 +73,6 @@ class LogProcess(DataProcessor):
 
 
 def demo_nexus():
-    nbr_data = [1, 2, 3, 4, 5]
-    str_data = "Hello Nexus World"
-    log_data = "ERROR: Connection Timeout"
-
     print("\nInitializing Numeric Processor...")
     print("Processing data:", nbr_data)
     nbr_processor = NumericProcessor()

@@ -22,22 +22,6 @@ achievements = [
 
 
 def gen_player_achievement() -> set:
-    """
-    Generate a random set of achievements for a player.
-
-    Randomly selects between 6 and the total number of available
-    achievements and returns them as a set to ensure uniqueness.
-
-    Returns
-    -------
-    set of str
-        A set containing randomly selected achievements.
-
-    Notes
-    -----
-    Uses ``random.sample``, so no duplicates are included. The result
-    depends on the global ``achievements`` list.
-    """
     count = random.randint(6, len(achievements))
     achievement = random.sample(achievements, count)
     return set(achievement)

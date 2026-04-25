@@ -4,18 +4,6 @@ import math
 
 
 def get_player_pos() -> tuple:
-    """
-    Prompt the user to enter 3D coordinates in the format 'x,y,z'.
-
-    The function validates the input, ensuring that exactly three values
-    are provided and that each value can be converted to float. If the
-    input is invalid, the user is prompted again until valid data is entered.
-
-    Returns
-    -------
-    tuple of float
-        A tuple containing the (x, y, z) coordinates.
-    """
     while True:
         user_input = input(
                             "Enter new coordinates "
@@ -44,22 +32,6 @@ def get_player_pos() -> tuple:
 
 
 def calc_distance(dest: tuple, origin: tuple) -> float:
-    """
-    Compute the Euclidean distance between two points in 3D space.
-
-    Parameters
-    ----------
-    dest : tuple
-        Destination point as (x, y, z).
-    origin : tuple
-        Origin point as (x, y, z).
-
-    Returns
-    -------
-    float
-        The distance between the two points.
-    """
-
     x1, y1, z1 = origin
     x2, y2, z2 = dest
     dist = float(math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2))

@@ -1,36 +1,15 @@
 #!/usr/bin/env python3
 
 class Plant:
-    """
-    Represent a plant with basic attributes and tracking.
-
-    Attributes
-    ----------
-    name : str
-        Name of the plant.
-    height : float
-        Height in centimeters.
-    age : int
-        Age in days.
-    total_plants : int
-        Total number of Plant instances created.
-    """
-
     total_plants = 0
 
     def __init__(self, name: str, height: float, age: int):
-        """
-        Initialize a Plant instance.
-        """
         self.name = name
         self.height = height
         self.age = age
         Plant.total_plants += 1
 
     def show(self):
-        """
-        Display the current state of the plant.
-        """
         print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
 
 

@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""
-Display the program name and command-line arguments.
-
-If no arguments are provided, prints a warning.
-Otherwise, prints each argument and the total count.
-"""
 
 import sys
 

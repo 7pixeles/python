@@ -1,23 +1,7 @@
 #!/usr/bin/env python3
 
 class Plant:
-    """
-    Base class representing a plant.
-
-    Parameters
-    ----------
-    name : str
-        Plant name.
-    height : float
-        Height in centimeters.
-    age : int
-        Age in days.
-    """
-
     class _Stats:
-        '''
-        Internal class to track method usage statistics
-        '''
         def __init__(self):
             self.grow_calls = 0
             self.age_calls = 0
@@ -36,64 +20,36 @@ class Plant:
         self._stats = self._Stats()
 
     def grow(self, value: float) -> None:
-        '''Increase plant height'''
         self.height += value
         self._stats.grow_calls += 1
 
     def age_up(self, value: int) -> None:
-        '''Increase plant age'''
         self.age += value
         self._stats.age_calls += 1
 
     def show(self) -> None:
-        '''Display plant information'''
         print(f"{self.name}: {self.height}cm, {self.age} days old.")
         self._stats.show_calls += 1
 
     def display_stats(self) -> None:
-        '''Display plant statistics'''
         self._stats.display()
 
     @staticmethod
     def is_older(age: int) -> bool:
-        '''
-        Check if age exceeds one year.
-
-        Parameters
-        ----------
-        age : int
-            Age in days.
-
-        Returns
-        -------
-        bool
-            True if age > 365 days
-        '''
         return age > 365
 
     @classmethod
     def anonymous(cls):
-        '''
-        Create an anonymous plant.
-
-        Returns:
-        -------
-        Plant
-            Default plant instance
-        '''
         return cls("Unknown plant", 0.0, 0)
 
 
 class Flower(Plant):
-    '''Flower plant type'''
-
     def __init__(self, name: str, height: float, age: int, color: str):
         super().__init__(name, height, age)
         self.color = color
         self.is_blooming = False
 
     def bloom(self):
-        '''Make the flower bloom'''
         print(f"[asking the {self.name.lower()} to bloom]")
         self.is_blooming = True
 
@@ -107,8 +63,6 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    '''Tree plant type'''
-
     def __init__(self, name: str, height: float, age: int,
                  trunk_diameter: float):
         super().__init__(name, height, age)
@@ -116,7 +70,6 @@ class Tree(Plant):
         self.shade_calls = 0
 
     def produce_shade(self) -> None:
-        '''Produce shade'''
         print(f"[asking the {self.name.lower()} to produce shade]")
         print(f"Tree {self.name} now produces a shade of "
               f"{self.height}cm long and "
@@ -129,8 +82,6 @@ class Tree(Plant):
 
 
 class Seed(Flower):
-    '''Flower that produces seeds'''
-
     def __init__(self, name: str, height: float, age: int,
                  color: str):
         super().__init__(name, height, age, color)
@@ -146,15 +97,6 @@ class Seed(Flower):
 
 
 def show_plant_stats(plant: Plant) -> None:
-    '''
-    Display statistics for any plant.
-
-    Parameters:
-    ----------
-    plant : Plant
-        Plant instance.
-    '''
-
     print(f"[statistics for {plant.name}]")
     plant.display_stats()
 

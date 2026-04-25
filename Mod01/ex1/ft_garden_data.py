@@ -1,25 +1,12 @@
 #!/usr/bin/env python3
 
 class Plant:
-    """
-    Represent a plant with basic attributes.
-
-    Parameters
-    ----------
-    name : str
-        Plant name.
-    height : float
-        Height in centimeters.
-    age : int
-        Age in days.
-    """
     def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
         self.height = height
         self.age = age
 
     def show(self) -> None:
-        """Display plant information."""
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 

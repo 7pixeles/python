@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
 
 def garden_operations(operation_number: int) -> None:
-    """
-    Execute faulty operations to trigger different exceptions.
-
-    Parameters
-    ----------
-    operation_number : int
-        Determines which error to trigger.
-    """
     if operation_number == 0:
         int("abc")
     elif operation_number == 1:
@@ -22,9 +14,6 @@ def garden_operations(operation_number: int) -> None:
 
 
 def test_error_types() -> None:
-    """
-    Test different exception types and ensure program continues.
-    """
     print("=== Garden Error Types Demo ===")
 
     for n in range(8):

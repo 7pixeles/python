@@ -1,18 +1,6 @@
 #!/usr/bin/env python3
 
 class Plant:
-    """
-    Represent a plant with growth behavior.
-
-    Parameters
-    ----------
-    name : str
-        Plant name.
-    height : float
-        Height in centimeters.
-    age : int
-        Age in days.
-    """
 
     def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
@@ -20,15 +8,12 @@ class Plant:
         self.age = age
 
     def grow(self, value: float) -> None:
-        '''Increase plant height'''
         self.height += value
 
     def increment_age(self, value: int) -> None:
-        '''Increase plant age'''
         self.age += value
 
     def show(self) -> None:
-        '''Display plant state'''
         print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
 
 
