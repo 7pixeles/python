@@ -1,64 +1,65 @@
 #!/usr/bin/env python3
 
-def create_archive() -> str:
-    """
-    Creates a new archive file with preset data.
-
-    Returns:
-        str: File name if creation succeeds.
-        None: If creation fails (e.g., permissions or disk error).
-    """
-    file_name = "new_discovery.txt"
-    print(f"\nInitializing new storage unit: {file_name}")
-    try:
-        file = open(file_name, "w")
-        print("Storage unit created successfully...")
-        print("\nInscribing preservation data...")
-
-        content = (
-            "[ENTRY 001] New quantum algorithm discovered\n"
-            "[ENTRY 002] Efficiency increased by 347%\n"
-            "[ENTRY 003] Archived by Data Archivist trainee"
-        )
-        print(file_name)
-        file.write(content)
-        file.close()
-        return (file_name)
-
-    except OSError:
-        print("ERROR: Unable to create archive")
-        return None
+import sys
 
 
-def read_archive(file_name: str) -> None:
-    """
-    Reads and prints the content of an archive file.
+def transform_data(file_name: str) -> str:
+    result = ""
+    file = None
 
-    Args:
-        file_name (str): Archive file to read.
+    file = open(file_name, "r")
+    for line in file:
+        result += line.rstrip("\n") + "#\n"
 
-    Returns:
-        None
-    """
+    file.close()
+    return result
+
+
+def read_archive(file_name: str) -> bool:
+    file = None
+    success = True
+
     try:
         file = open(file_name, "r")
         content = file.read()
-
-        if not content:
-            print("Archive is empty.")
-        else:
-            print(content)
-
-        print("\nData inscription complete. Storage unit sealed.")
-        print(f"Archive '{file_name}' ready for long-term preservation.")
-        file.close()
+        print(content)
 
     except OSError:
         print("ERROR: Unable to read archive")
+        success = False
 
+    finally:
+        if file:
+            file.close()
+            print("\n---\n")
+            print(f"File '{file_name}' closed")
+
+    return success
 
 if __name__ == "__main__":
-    print("=== CYBER ARCHIVES - PRESERVATION SYSTEM ===\n")
-    file = create_archive()
-    if file is not None:
-        read_archive(file)
+    print("=== Cyber Archives Recovery & Preservation ===")
+    if len(sys.argv) != 2:
+        print("Usage: python3 ft_archive_creation.py <filename.txt>")
+        sys.exit(1)
+
+    file_name = sys.argv[1]
+    print(f"Accessing file '{file_name}'")
+    print("\n---\n")
+    if not read_archive(file_name):
+        sys.exit(1)
+
+    print("\nTransform data:")
+    print("---\n")
+    transformed_content = transform_data(file_name)
+    print(transformed_content, end="")
+    print("\n---")
+
+    new_name = input("Enter new file name (or empty): ")
+    if new_name:
+        print(f"Saving data to '{new_name}'")
+        new_file = open(new_name, "w")
+        new_file.write(transformed_content)
+        new_file.close()
+        print(f"Data saved in file '{new_name}'.")
+    else:
+        print("Not saving data.")
