@@ -36,6 +36,7 @@ def read_archive(file_name: str) -> bool:
 
     return success
 
+
 if __name__ == "__main__":
     print("=== Cyber Archives Recovery & Preservation ===")
     if len(sys.argv) != 2:

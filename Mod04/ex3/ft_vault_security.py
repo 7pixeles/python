@@ -1,35 +1,49 @@
 #!/usr/bin/env python3
 
-def security_system():
-    """
-    Simulates secure vault access by reading classified data
-    and writing new security protocol entries.
-    """
-    print("[SECURE ACCESS] Attempting vault connection...")
-    print("[ACCESS GRANTED] Classified data retrieved successfully")
+def secure_archive(file_name: str, action="read", content=None) -> tuple:
+    if action not in ("read" "write"):
+        return (False, "Invalid action")
+
+    if action == "write" and content is None:
+        return (False, "No content to write")
+
     try:
-        classified_file = "classified_data.txt"
-        print("\nSECURE EXTRACTION")
-        with open(classified_file, "r") as extraction_file:
-            print(extraction_file.read())
+        mode = "r" if action == "read" else "w"
+
+        with open(file_name, mode) as file:
+
+            if action == "read":
+                result = file.read()
+            else:
+                file.write(content)
+                result = "Content successfully written to file."
+
+        return (True, result)
+
     except FileNotFoundError:
-        print("[SECURITY ERROR] Vault not found")
+        return (False, "File not found.")
 
-    try:
-        security_file = "security_protocols.txt"
-        print("\nSECURE PRESERVATION")
-        with open(security_file, "w") as preservation_file:
-            entry_data = "[CLASSIFIED] New security protocols archived"
-            preservation_file.write(entry_data)
-            print(entry_data)
+    except PermissionError:
+        return (False, "Permission denied.")
 
-    except OSError:
-        print("[ERROR] Operating System Error")
-
-    print("\nCOMPLETED:"
-          "[VAULT SEALED] Connection terminated securely")
+    except Exception as error:
+        return (False, str(error))
 
 
 if __name__ == "__main__":
-    print("=== CYBER ARCHIVES - VAULT SECURITY SYSTEM ===\n")
-    security_system()
+    print("=== Cyber Archives Security ===\n")
+    print("Using 'secure_archive' to read from a nonexistent file:")
+    print(secure_archive("/not/existing/file.txt"))
+    print()
+    print("Using 'secure_archive' to read from a innaccesible file:")
+    print(secure_archive("/etc/master.passwd"))
+    print()
+    print("Using 'secure archive' to read from a regular file:")
+    success, data = secure_archive("ancient_fragment.txt")
+    print(success, data)
+    print()
+    print("Using 'secure_archive' to write previous content to a new file:")
+    if success:
+        print(secure_archive("new_file.txt", "write", data))
+    else:
+        print("Failed read")
