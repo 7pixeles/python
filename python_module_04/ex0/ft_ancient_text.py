@@ -2,7 +2,7 @@
 import sys
 
 
-def recovery_files():
+def recovery_files() -> None:
     if len(sys.argv) > 1:
         try:
             file_source = sys.argv[1]
@@ -24,5 +24,5 @@ def recovery_files():
 
 
 if __name__ == "__main__":
-    print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
+    print("=== Cyber Archives Recovery ===")
     recovery_files()
