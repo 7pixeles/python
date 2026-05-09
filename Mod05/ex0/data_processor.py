@@ -53,8 +53,8 @@ class NumericProcessor(DataProcessor):
         if isinstance(data, list):
             for value in data:
                 self._stack.append(str(value))
-            else:
-                self._stack.append(str(data))
+        else:
+            self._stack.append(str(data))
 
 
 class TextProcessor(DataProcessor):
