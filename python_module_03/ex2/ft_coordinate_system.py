@@ -8,27 +8,20 @@ def get_player_pos() -> tuple:
         user_input = input(
                             "Enter new coordinates "
                             "as floats in format 'x,y,z': ")
-        parts = user_input.split(",")
 
-        if len(parts) != 3:
-            print("Invalid sintax")
-            continue
+        try:
+            x, y, z = user_input.split(",")
 
-        coords = []
-        error_found = False
+            coords = (
+                float(x.strip()),
+                float(y.strip()),
+                float(z.strip())
+            )
 
-        for axis in parts:
-            try:
-                coords.append(float(axis.strip()))
-            except ValueError as error:
-                print(f"Error on parameter '{axis}': {error}")
-                error_found = True
-                break
+            return coords
 
-        if error_found:
-            continue
-
-        return tuple(coords)
+        except ValueError as error:
+            print(f"Invalid input: {error}")
 
 
 def calc_distance(dest: tuple, origin: tuple) -> float:
