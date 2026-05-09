@@ -29,7 +29,7 @@ def gen_event() -> Generator[tuple, None, None]:
         yield player, action
 
 
-def consume_event(events: list):
+def consume_event(events: list) -> Generator[tuple[str, str], None, None]:
     print(events)
     while events:
         random_item = random.choice(events)

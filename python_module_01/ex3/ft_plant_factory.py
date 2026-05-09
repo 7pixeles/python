@@ -3,13 +3,13 @@
 class Plant:
     total_plants = 0
 
-    def __init__(self, name: str, height: float, age: int):
+    def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
         self.height = height
         self.age = age
         Plant.total_plants += 1
 
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
 
 

@@ -15,7 +15,7 @@ regular_names = [
     ]
 
 if __name__ == "__main__":
-    print("=== Game Data Alchmeist ===\n")
+    print("=== Game Data Alchemist ===\n")
 
     print("Initial list of players:", regular_names)
 
@@ -26,7 +26,7 @@ if __name__ == "__main__":
                             if name and name[0].isupper()]
     print("New list of capitalized names only:", original_capitalized)
 
-    name_dict = {name: random.choice(range(1000)) for name in capitalized}
+    name_dict = {name: random.randint(0, 1000) for name in capitalized}
     print("Score dict:", name_dict)
 
     average = sum(value for key, value in name_dict.items()) / len(name_dict)

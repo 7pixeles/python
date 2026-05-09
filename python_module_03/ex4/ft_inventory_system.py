@@ -66,6 +66,13 @@ def get_min_value(inventory: Dict[str, int]) -> None:
 if __name__ == "__main__":
 
     print("=== Inventory System Analysis ===")
+
+    # Controlling void arguments
+    if not sys.argv[1:]:
+        print("No arguments provided!")
+        print(f"Try 'python3 {sys.argv[0]} <arg1> <arg2>'")
+        sys.exit(1)
+
     inventory = parse_args(sys.argv[1:])
 
     print("Got inventory:", inventory)

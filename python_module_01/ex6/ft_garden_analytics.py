@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 
+
 class Plant:
     class _Stats:
-        def __init__(self):
+        def __init__(self) -> None:
             self.grow_calls = 0
             self.age_calls = 0
             self.show_calls = 0
 
-        def display(self):
-            '''Print Statistics'''
+        def display(self) -> None:
             print(f"Stats: {self.grow_calls} grow, "
                   f"{self.age_calls} age, "
                   f"{self.show_calls} show")
 
-    def __init__(self, name: str, height: float, age: int):
+    def __init__(self, name: str,
+                 height: float,
+                 age: int) -> None:
         self.name = name
         self.height = height
         self.age = age
@@ -39,21 +41,24 @@ class Plant:
         return age > 365
 
     @classmethod
-    def anonymous(cls):
+    def anonymous(cls) -> "Plant":
         return cls("Unknown plant", 0.0, 0)
 
 
 class Flower(Plant):
-    def __init__(self, name: str, height: float, age: int, color: str):
+    def __init__(self, name: str,
+                 height: float,
+                 age: int,
+                 color: str) -> None:
         super().__init__(name, height, age)
         self.color = color
         self.is_blooming = False
 
-    def bloom(self):
+    def bloom(self) -> None:
         print(f"[asking the {self.name.lower()} to bloom]")
         self.is_blooming = True
 
-    def show(self):
+    def show(self) -> None:
         super().show()
         print(f"Color: {self.color}")
         if self.is_blooming:
@@ -63,8 +68,10 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    def __init__(self, name: str, height: float, age: int,
-                 trunk_diameter: float):
+    def __init__(self, name: str,
+                 height: float,
+                 age: int,
+                 trunk_diameter: float) -> None:
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
         self.shade_calls = 0
@@ -82,16 +89,18 @@ class Tree(Plant):
 
 
 class Seed(Flower):
-    def __init__(self, name: str, height: float, age: int,
-                 color: str):
+    def __init__(self, name: str,
+                 height: float,
+                 age: int,
+                 color: str) -> None:
         super().__init__(name, height, age, color)
         self.seeds = 0
 
-    def bloom(self):
+    def bloom(self) -> None:
         super().bloom()
         self.seeds = 42
 
-    def show(self):
+    def show(self) -> None:
         super().show()
         print(f"Seeds: {self.seeds}")
 
