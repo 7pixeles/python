@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-def secure_archive(file_name: str, action="read", content=None) -> tuple:
+def secure_archive(file_name: str,
+                   action: str = "read",
+                   content: str | None = None) -> tuple:
     if action not in ("read" "write"):
         return (False, "Invalid action")
 
@@ -27,7 +29,7 @@ def secure_archive(file_name: str, action="read", content=None) -> tuple:
         return (False, "Permission denied.")
 
     except Exception as error:
-        return (False, str(error))
+        return (False, error)
 
 
 if __name__ == "__main__":
