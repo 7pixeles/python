@@ -33,11 +33,8 @@ class NumericProcessor(DataProcessor):
         return isinstance(data, (int, float)) and not isinstance(data, bool)
 
     def validate(self, data: Any) -> bool:
-        # Comprueba que los elementos sean números válidos
         if self._is_valid_number(data):
             return True
-        # Comprueba que todos los elementos de data (list) sean válidos
-        # return all(self._is_valid_number(value) for value in data)
         if isinstance(data, list):
             for value in data:
                 if not self._is_valid_number(value):
@@ -46,10 +43,10 @@ class NumericProcessor(DataProcessor):
         return False
 
     def ingest(self, data: Any) -> None:
-        # Validar otra vez
+
         if not self.validate(data):
             raise Exception("Improper numeric data")
-        # Añade al stack de almacenaje
+
         if isinstance(data, list):
             for value in data:
                 self._stack.append(str(value))
@@ -74,14 +71,8 @@ class TextProcessor(DataProcessor):
     def ingest(self, data: Any) -> None:
         if not self.validate(data):
             raise Exception("Improper text data")
-        '''
-        lista = [1, 2]; lista.append([3, 4]) -> Resultado: [1, 2, [3, 4]]
-        lista = [1, 2]; lista.extend([3, 4]) -> Resultado: [1, 2, 3, 4]
-        '''
-        # Desempaqueta el iterable y añade sus elementos uno a uno
         if isinstance(data, list):
             self._stack.extend(data)
-        # Añade el argumento tal cual, como un único elemento
         else:
             self._stack.append(data)
 
