@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 
 
 class DataProcessor(ABC):
+    '''Estructura común de todos los procesadores'''
     name: str
     total_processor: int
     buffer: list[any]
@@ -16,7 +17,7 @@ class DataProcessor(ABC):
     @abstractmethod
     def process(self, data: Any) -> None:
         pass
-    
+
     @abstractmethod
     def output(self) -> list[tuple[int, str]]:
         pass
@@ -42,7 +43,7 @@ class DataStream:
             if not handled:
                 print(f"DataStream error - Can't process"
                       f"element in stream {element}")
-    
+
     def print_processors_stats(self) -> None:
         print("\n== DataStream statistics ==")
 
@@ -63,14 +64,14 @@ class NumericProcessor(DataProcessor):
         self.buffer: list[Any] = []
 
     def can_process(self, data: Any) -> bool:
-         return (isinstance(data, (int, float)) or isinstance(data, list)
-                 and all(isinstance(value, (int, float)) for value in data))
+        return (isinstance(data, (int, float)) or isinstance(data, list)
+                and all(isinstance(value, (int, float)) for value in data))
 
     def process(self, data: Any) -> None:
         if isinstance(data, list):
             self.buffer.extend(data)
             self.total_processed += len(data)
-    
+
     def output(self, n: int) -> list[Any]:
         taken = self.buffer[:n]
         self.buffer = self.buffer[n:]
@@ -86,7 +87,7 @@ class TextProcessor(DataProcessor):
     def can_process(self, data: Any) -> bool:
         return (isinstance(data, str) or (isinstance(data, list)
                 and all(isinstance(value, str) for value in data)))
-    
+
     def process(self, data: Any) -> None:
         if isinstance(data, list):
             self.buffer.extend(data)
@@ -94,7 +95,7 @@ class TextProcessor(DataProcessor):
         else:
             self.buffer.append(data)
             self.total_processed += 1
-    
+
     def output(self, n: int) -> list[Any]:
         taken = self.buffer[:n]
         self.buffer = self.buffer[n:]
@@ -102,8 +103,8 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
-    def __init__(self)-> None:
-        self.name  = "Log Processor"
+    def __init__(self) -> None:
+        self.name = "Log Processor"
         self.total_processed = 0
         self.buffer: list[Any] = []
 
@@ -119,7 +120,8 @@ class LogProcessor(DataProcessor):
         taken = self.buffer[:n]
         self.buffer = self.buffer[n:]
         return taken
-    
+
+
 if __name__ == "__main__":
     print("=== Code Nexus - Data Stream ===")
     ds = DataStream()
@@ -133,11 +135,11 @@ if __name__ == "__main__":
     stream = [
         "Hello World",
         [3.14, -1, 2.71],
-        [{"log_level": "WARNING",
-          "log_message": "Telnet access! Use ssh instead"},
-         {"log_level": "INFO",
-          "log_message": "User wil is connected"}],
-          42, ["Hi", "Five"]
+        [
+            {"log_level": "WARNING",
+             "log_message": "Telnet access! Use ssh instead"},
+            {"log_level": "INFO",
+             "log_message": "User wil is connected"}], 42, ["Hi", "Five"]
         ]
     print("\nSend first batch of data on stream:", stream)
     ds.process_stream(stream)
@@ -155,6 +157,7 @@ if __name__ == "__main__":
         "\nConsume some elements from the data processors:"
         "Numeric 3, Text 2, Log 1"
     )
+
     num_proc = ds.processors[0]
     text_proc = ds.processors[1]
     log_proc = ds.processors[2]

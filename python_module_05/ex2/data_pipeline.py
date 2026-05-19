@@ -152,7 +152,8 @@ class LogProcessor(DataProcessor):
             self.output_index += 1
         return result
 
-#“If it walks like a duck and quacks like a duck, it’s a duck.”
+
+# “If it walks like a duck and quacks like a duck, it’s a duck.”
 class CSVPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
         print("CSV Output:")

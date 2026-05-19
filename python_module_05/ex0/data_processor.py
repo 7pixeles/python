@@ -65,7 +65,6 @@ class TextProcessor(DataProcessor):
                 if not isinstance(value, str):
                     return False
             return True
-
         return False
 
     def ingest(self, data: Any) -> None:
