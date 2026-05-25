@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # import relativo -> .. (sube dos niveles)
-# import absoluto -> busca desde la raí<
+# import absoluto -> busca desde la raíz
 from elements import create_fire
 from ..elements import create_air
 from ..potions import strength_potion
