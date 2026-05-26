@@ -2,14 +2,15 @@
 
 # Busca elements.py dentro del MISMO paquete
 # Intencionadamente, solo exportamos un solo módulo
-from .elements import create_air
-from .potions import strength_potion, healing_potion
+from . import elements
+from .potions import strength_potion, healing_potion as heal
 from .transmutation import lead_to_gold
 
-heal = healing_potion
+# Crea un alias para que se pueda usar este elemento directamente (alembic4)
+# Create_earth = elements.create_earth
+create_air = elements.create_air
 
 __all__ = ["create_air",
            "strength_potion",
-           "healing_potion",
            "heal",
            "lead_to_gold"]
