@@ -6,7 +6,7 @@ from ex0.creatures import Creature
 
 class HealCapability(ABC):
     @abstractmethod
-    def heal(self) -> None:
+    def heal(self) -> str:
         pass
 
 
@@ -15,6 +15,7 @@ class TransformCapability(ABC):
     def transform(self) -> str:
         pass
 
+    @abstractmethod
     def revert(self) -> str:
         pass
 
@@ -24,7 +25,7 @@ class Sproutling(Creature, HealCapability):
         super().__init__("Sproutling", "Grass")
 
     def attack(self) -> str:
-        return f"{self.name} uses Vine Whip"
+        return f"{self.name} uses Vine Whip!"
 
     def heal(self) -> str:
         return f"{self.name} heals itself for a small amount"
@@ -35,7 +36,7 @@ class Bloomelle(Creature, HealCapability):
         super().__init__("Bloomelle", "Grass/Fairy")
 
     def attack(self) -> str:
-        return f"{self.name} uses Petal Dance"
+        return f"{self.name} uses Petal Dance!"
 
     def heal(self) -> str:
         return f"{self.name} heals itself and others for a large amount"

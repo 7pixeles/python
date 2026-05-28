@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-from .capabilities import (Creature, Sproutling, Bloomelle,
-                           Shiftling, Morphagon)
 from ex0.factory import CreatureFactory
+from ex0.creatures import Creature
+from .capabilities import (Sproutling, Bloomelle,
+                           Shiftling, Morphagon)
 
 
 class HealingCreatureFactory(CreatureFactory):

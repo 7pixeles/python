@@ -11,12 +11,12 @@ def healing_factory(factory: Any) -> None:
 
     print("Testing Creature with healing capability")
 
-    print("\nbase:")
+    print("base:")
     print(base.describe())
     print(base.attack())
     print(base.heal())
 
-    print("\nevolved:")
+    print("evolved:")
     print(evolved.describe())
     print(evolved.attack())
     print(evolved.heal())
@@ -28,14 +28,14 @@ def transform_factory(factory: Any) -> None:
 
     print("Testing Creature with transform capability")
 
-    print("\nbase:")
+    print("base:")
     print(base.describe())
     print(base.attack())
     print(base.transform())
     print(base.attack())
     print(base.revert())
 
-    print("\nevolved:")
+    print("evolved:")
     print(evolved.describe())
     print(evolved.attack())
     print(evolved.transform())
