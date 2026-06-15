@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "loading"
+version = "0.1.0"
+description = "Matrix data analysis"
+authors = ["ayucarre"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^3.0.3"
+numpy = "^2.4.6"
+matplotlib = "^3.11.0"
+requests = "^2.36.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+ignore_missing_imports = true
