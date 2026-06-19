@@ -214,3 +214,5 @@ subjects/
 .DS_Store
 
 .vscode/
+
+venv.matrix
