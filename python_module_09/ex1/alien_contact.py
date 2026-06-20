@@ -65,17 +65,18 @@ def main() -> None:
         )
         print("Valid contact report:")
         print(f"ID: {valid_contact.contact_id}")
-        # Se pone value porque si lo dejo sin
-        # value me saca Contacttype.RADIO y quiero que saque solo radio
         print(f"Type: {valid_contact.contact_type.value}")
         print(f"Location: {valid_contact.location}")
         print(f"Signal: {valid_contact.signal_strength}/10")
         print(f"Duration: {valid_contact.duration_minutes} minutes")
         print(f"Witnesses: {valid_contact.witness_count}")
+
         if valid_contact.message_received:
             print(f"Message: '{valid_contact.message_received}'")
+
     except ValidationError as e:
         print(e.errors()[0]["msg"])
+
     print()
     print("=" * 40,)
 
