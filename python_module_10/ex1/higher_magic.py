@@ -1,4 +1,4 @@
-from collections.abc import Callable
+from typing import Callable
 
 Spell = Callable[[str, int], str]
 
@@ -26,6 +26,12 @@ def spell_combiner(
         spell1: Spell, spell2: Spell
 ) -> Callable[[str, int], tuple[str, str]]:
 
+    ''' Combine two spells
+        Return: a new function that calls
+                both spells with the same arguments.
+        The combined spell should return a tuple of both results
+    '''
+
     return lambda target, power: (
         spell1(target, power),
         spell2(target, power)
@@ -33,6 +39,12 @@ def spell_combiner(
 
 
 def power_amplifier(base_spell: Spell, multiplier: int) -> Spell:
+    ''' Amplify spell power:
+        Return: a function with the same signature as the original spell
+        Return: a new spell where the power is multiplied before casting.
+
+        Example: mega_fireball = power_amplifier(fireball, 3)
+    '''
 
     return lambda target, power: base_spell(target, power * multiplier)
 
@@ -41,6 +53,12 @@ def conditional_caster(
         condition: Callable[[str, int], bool],
         spell: Spell
 ) -> Callable[[str, int], str]:
+
+    ''' Cast spell conditionally:
+        Return: a new spell that only casts if a condition is True.
+            If condition fails, return "Spell fizzled"
+            Both condition and spell receive the same arguments
+    '''
 
     return lambda target, power: (
         spell(target, power)
@@ -52,6 +70,12 @@ def conditional_caster(
 def spell_sequence(
         spells: list[Spell]
 ) -> Callable[[str, int], list[str]]:
+    ''' Create spell sequence:
+        Return: a function that casts all spells in order
+            Each spell receives the same arguments
+        Return: a list of all spell results
+    '''
+
 
     return lambda target, power: [
         spell(target, power) for spell in spells

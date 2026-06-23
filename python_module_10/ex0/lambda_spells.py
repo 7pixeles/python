@@ -1,9 +1,5 @@
-# Lambda: Permiten definir una función pequeña directamente donde se necesita
-# La función existe solo para esa operación y no ocupa espacio adicional
-# en el programa.
-# Si la función cabe en una sola expresión y solo se usa una vez,
-# lambda suele ser apropiada.
-# Si empieza a ser difícil de leer, es preferible usar def.
+'''Lambda: Si la función cabe en una sola expresión y solo se usa una vez,
+Def: Si empieza a ser difícil de leer..'''
 
 from typing import Any
 
