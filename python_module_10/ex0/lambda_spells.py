@@ -3,6 +3,7 @@ Def: Si empieza a ser difícil de leer..'''
 
 from typing import Any
 
+
 def artifact_sorter(artifacts: list[dict[str, Any]]) -> list[dict[str, Any]]:
     '''
         Use sorted() with a lambda to sort by "power" level (descending)

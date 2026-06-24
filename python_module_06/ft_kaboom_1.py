@@ -10,4 +10,4 @@ if __name__ == "__main__":
     # Import dentro de main, no da error de flake8
     from alchemy.grimoire.dark_spellbook import dark_spell_record
 
-    print(f"{dark_spell_record('Fantasy',' Earth, water and air')}")
+    print(f"{dark_spell_record('Fantasy', ' Earth, water and air')}")

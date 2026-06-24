@@ -76,7 +76,6 @@ def spell_sequence(
         Return: a list of all spell results
     '''
 
-
     return lambda target, power: [
         spell(target, power) for spell in spells
     ]

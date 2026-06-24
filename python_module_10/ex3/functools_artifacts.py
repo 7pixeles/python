@@ -1,5 +1,4 @@
 from typing import Any, Callable
-from collections.abc import Sequence
 from functools import reduce, partial, lru_cache, singledispatch
 from operator import add, mul
 
@@ -14,13 +13,11 @@ operations: dict[str, Callable[[int, int], int]] = {
 
 def spell_reducer(spells: list[int], operation: str) -> int:
     """
-    Reduces a list of integers using a named operation.
-
-    Supported operations:
-    - add
-    - multiply
-    - max
-    - min
+    Reduce spell power.
+    Support operations: add, multiply, max, min
+    Return: the final reduced value
+        if spells is empty, return 0
+        if operation is unknown, handle the error
     """
     if not spells:
         return 0
@@ -35,10 +32,11 @@ def partial_enchanter(
     base_enchantment: Callable[[int, str, str], str]
 ) -> dict[str, Callable[[str], str]]:
     """
-    Creates partially applied enchantment functions for different elements.
-
-    Each returned function fixes the power (50) and element type,
-    leaving only the target as a parameter.
+    Create partial applications.
+    Take a base enchantment function with concrete signature
+    Use functool.partial to create 3 specialized versions
+    Each version pre-filling power=50 and the element
+    partial fixed two first arguments
     """
     return {
         "fire": partial(base_enchantment, 50, "fire"),
