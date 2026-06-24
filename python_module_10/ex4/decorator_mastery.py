@@ -3,7 +3,6 @@ from collections.abc import Callable
 from functools import wraps
 
 
-# Recibe una función
 def spell_timer(func: Callable) -> Callable:
     '''
     Time execution decorator:
@@ -75,6 +74,7 @@ def retry_spell(max_attempts: int) -> Callable:
 
 
 class MageGuild:
+    '''Demonstrate staticmethod'''
     @staticmethod
     def validate_mage_name(name: str) -> bool:
         return (
